@@ -76,12 +76,11 @@ const initialCustomers: any[] = [];
 const initialDebts: any[] = [];
 
 const CHART_COLORS = [
-  { name: 'Blue', hex: '#3b82f6' },
-  { name: 'Indigo', hex: '#6366f1' },
+  { name: 'Gold', hex: '#f59e0b' },
+  { name: 'Amber', hex: '#d97706' },
   { name: 'Emerald', hex: '#10b981' },
   { name: 'Rose', hex: '#f43f5e' },
-  { name: 'Amber', hex: '#f59e0b' },
-  { name: 'Purple', hex: '#8b5cf6' },
+  { name: 'Zinc', hex: '#52525b' },
 ];
 
 // --- COMPONENTS ---
@@ -97,13 +96,13 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen, activeTab, setActiveTab }: { i
 
   return (
     <>
-      <div className={`fixed inset-0 bg-slate-900/50 z-20 transition-opacity lg:hidden ${isSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setSidebarOpen(false)} />
-      <div className={`fixed inset-y-0 left-0 w-52 bg-slate-900 z-30 transition-transform duration-300 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:block flex flex-col shrink-0`}>
+      <div className={`fixed inset-0 bg-black/50 z-20 transition-opacity lg:hidden ${isSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setSidebarOpen(false)} />
+      <div className={`fixed inset-y-0 left-0 w-52 bg-black z-30 transition-transform duration-300 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:block flex flex-col shrink-0`}>
         <div className="p-4 flex items-center gap-2 mb-4">
-          <div className="w-8 h-8 bg-blue-500 rounded flex items-center justify-center font-bold text-white text-sm">
+          <div className="w-8 h-8 bg-amber-500 rounded flex items-center justify-center font-bold text-black text-sm">
             <Package className="h-5 w-5" />
           </div>
-          <span className="text-white font-bold tracking-tight uppercase text-sm">NAS FINANCE</span>
+          <span className="text-amber-500 font-bold tracking-tight uppercase text-sm">NAS FINANCE</span>
         </div>
         <nav className="flex-1 px-2 space-y-1 overflow-y-auto">
           {navItems.map((item) => (
@@ -112,8 +111,8 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen, activeTab, setActiveTab }: { i
               onClick={() => { setActiveTab(item.id); setSidebarOpen(false); }}
               className={`flex items-center gap-3 w-full px-3 py-2 text-xs font-medium rounded transition-colors ${
                 activeTab === item.id 
-                  ? 'bg-slate-800 text-white' 
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                  ? 'bg-zinc-800 text-white' 
+                  : 'text-zinc-500 hover:text-white hover:bg-zinc-800/50'
               }`}
              >
                <item.icon className="h-4 w-4" />
@@ -126,7 +125,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen, activeTab, setActiveTab }: { i
             <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User avatar" className="w-8 h-8 rounded bg-slate-700 object-cover" />
             <div className="overflow-hidden flex-1 text-left">
               <span className="block text-xs text-white truncate font-medium">Adam Sanz</span>
-              <span className="block text-[10px] text-slate-500 uppercase tracking-widest">Admin Role</span>
+              <span className="block text-[10px] text-zinc-400 uppercase tracking-widest">Admin Role</span>
             </div>
           </div>
         </div>
@@ -137,24 +136,24 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen, activeTab, setActiveTab }: { i
 
 const KPICard = ({ title, value, icon: Icon, trend, trendValue, isPositive }: any) => {
   const trendColor = isPositive ? 'text-emerald-600' : 'text-rose-600';
-  const barColor = isPositive ? 'bg-blue-500' : 'bg-rose-500';
+  const barColor = isPositive ? 'bg-amber-500' : 'bg-rose-500';
   return (
-    <div className="bg-white p-4 rounded border border-slate-200 shadow-sm flex flex-col justify-between">
+    <div className="bg-zinc-900 p-4 rounded border border-zinc-800 shadow-sm flex flex-col justify-between">
       <div className="flex items-start justify-between mb-2">
         <div>
-          <h3 className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">{title}</h3>
+          <h3 className="text-[10px] uppercase font-bold text-zinc-500 tracking-wider mb-1">{title}</h3>
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-mono font-bold text-slate-900">{value}</span>
+            <span className="text-2xl font-mono font-bold text-white">{value}</span>
             <span className={`text-[10px] font-bold ${trendColor}`}>
               {trendValue}
             </span>
           </div>
         </div>
-        <div className="hidden sm:flex h-8 w-8 rounded bg-slate-50 items-center justify-center border border-slate-100 shrink-0">
-          <Icon className="h-4 w-4 text-slate-400" />
+        <div className="hidden sm:flex h-8 w-8 rounded bg-zinc-950 items-center justify-center border border-zinc-800 shrink-0">
+          <Icon className="h-4 w-4 text-zinc-500" />
         </div>
       </div>
-      <div className="w-full bg-slate-100 h-1 mt-auto rounded overflow-hidden">
+      <div className="w-full bg-zinc-800 h-1 mt-auto rounded overflow-hidden">
         <div className={`${barColor} h-full`} style={{ width: isPositive ? '75%' : '38%' }}></div>
       </div>
     </div>
@@ -228,21 +227,21 @@ export default function App() {
   }).sort((a, b) => b.expense - a.expense).slice(0, 7); // Top 7 expense categories
 
   return (
-    <div className="min-h-screen bg-slate-100 flex font-sans text-slate-900 overflow-hidden">
+    <div className="min-h-screen bg-[#0a0a0a] flex font-sans text-white overflow-hidden">
       <Sidebar isSidebarOpen={isSidebarOpen} setSidebarOpen={setSidebarOpen} activeTab={activeTab} setActiveTab={setActiveTab} />
       
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <header className="h-14 bg-white border-b border-slate-200 sticky top-0 z-10 flex items-center justify-between px-4 sm:px-5">
+        <header className="h-14 bg-zinc-900 border-b border-zinc-800 sticky top-0 z-10 flex items-center justify-between px-4 sm:px-5">
           <div className="flex items-center gap-4">
              <button 
                 onClick={() => setSidebarOpen(true)} 
-                className="lg:hidden p-1.5 -ml-1.5 rounded text-slate-500 hover:bg-slate-100"
+                className="lg:hidden p-1.5 -ml-1.5 rounded text-zinc-400 hover:bg-zinc-800"
               >
                 <Menu className="h-4 w-4" />
              </button>
              <div>
-               <h1 className="text-xl font-bold tracking-tight text-slate-900 hidden sm:block">
+               <h1 className="text-xl font-bold tracking-tight text-white hidden sm:block">
                  {activeTab === 'dashboard' ? 'Commercial Overview' : 
                   activeTab === 'transactions' ? 'Buku Tunai (Transaksi)' :
                   activeTab === 'inventory' ? 'Inventory Control' :
@@ -250,7 +249,7 @@ export default function App() {
                   activeTab === 'customers' ? 'Customer Directory' :
                   'Senarai Penghutang & Pemiutang'}
                </h1>
-               <p className="text-[10px] text-slate-500 uppercase tracking-widest hidden sm:block font-bold mt-0.5">
+               <p className="text-[10px] text-zinc-400 uppercase tracking-widest hidden sm:block font-bold mt-0.5">
                  {activeTab === 'dashboard' ? 'Operational performance overview' :
                   activeTab === 'transactions' ? 'Catat aliran keluar masuk wang' :
                   activeTab === 'inventory' ? 'Stock and product management' :
@@ -263,24 +262,24 @@ export default function App() {
           
           <div className="flex items-center gap-3">
             <div className="hidden md:flex relative group">
-              <Search className="h-3.5 w-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Search className="h-3.5 w-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-500" />
               <input 
                 type="text" 
                 placeholder="Search..." 
-                className="pl-8 pr-3 py-1.5 w-48 bg-slate-100 border border-transparent rounded text-[10px] font-medium focus:bg-white focus:border-slate-300 outline-none transition-all placeholder:text-slate-500 placeholder:uppercase"
+                className="pl-8 pr-3 py-1.5 w-48 bg-zinc-800 border border-transparent rounded text-[10px] font-medium focus:bg-zinc-900 focus:border-zinc-700 outline-none transition-all placeholder:text-zinc-400 placeholder:uppercase"
               />
             </div>
 
-            <div className="hidden sm:flex bg-white rounded border border-slate-200 p-1 items-center">
-              <button className="px-3 py-1 text-[10px] font-bold bg-slate-100 rounded border border-slate-300 text-slate-700">LAST 30 DAYS</button>
-              <button className="px-3 py-1 text-[10px] font-medium text-slate-500 uppercase">Custom</button>
+            <div className="hidden sm:flex bg-zinc-900 rounded border border-zinc-800 p-1 items-center">
+              <button className="px-3 py-1 text-[10px] font-bold bg-zinc-800 rounded border border-zinc-700 text-zinc-300">LAST 30 DAYS</button>
+              <button className="px-3 py-1 text-[10px] font-medium text-zinc-400 uppercase">Custom</button>
             </div>
 
-            <button className="hidden sm:block bg-blue-600 text-white px-4 py-1.5 rounded text-[10px] font-bold shadow-sm uppercase tracking-wider hover:bg-blue-700">
+            <button className="hidden sm:block bg-amber-500 text-black px-4 py-1.5 rounded text-[10px] font-bold shadow-sm uppercase tracking-wider hover:bg-amber-400">
               Export Data
             </button>
             
-            <button className="relative p-1.5 rounded text-slate-500 hover:bg-slate-100 transition-colors">
+            <button className="relative p-1.5 rounded text-zinc-400 hover:bg-zinc-800 transition-colors">
               <Bell className="h-4 w-4" />
               <span className="absolute top-1 right-1 h-1.5 w-1.5 rounded-full bg-rose-500 border-2 border-white"></span>
             </button>
@@ -291,14 +290,14 @@ export default function App() {
         <main className="flex-1 p-4 sm:p-5 overflow-y-auto space-y-4">
           {(activeTab === 'dashboard' || activeTab === 'analytics') && (
             <div className="flex justify-end items-center -mt-2 mb-2">
-              <div className="flex items-center gap-3 bg-white px-3 py-1.5 rounded border border-slate-200 shadow-sm">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Chart Color</span>
+              <div className="flex items-center gap-3 bg-zinc-900 px-3 py-1.5 rounded border border-zinc-800 shadow-sm">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Chart Color</span>
                 <div className="flex items-center gap-2">
                   {CHART_COLORS.map(color => (
                     <button
                       key={color.hex}
                       onClick={() => setChartColor(color.hex)}
-                      className={`w-3.5 h-3.5 rounded-full border border-slate-200 transition-all ${
+                      className={`w-3.5 h-3.5 rounded-full border border-zinc-800 transition-all ${
                         chartColor === color.hex ? 'ring-2 ring-slate-900 border-white scale-110' : 'hover:scale-110'
                       }`}
                       style={{ backgroundColor: color.hex }}
@@ -351,9 +350,9 @@ export default function App() {
           {(activeTab === 'dashboard' || activeTab === 'analytics') && (
             <div className={`grid grid-cols-1 ${activeTab === 'dashboard' ? 'lg:grid-cols-3' : 'lg:grid-cols-2'} gap-4`}>
               {/* Revenue Area Chart */}
-            <div className="lg:col-span-2 bg-white rounded flex flex-col border border-slate-200 p-4 shadow-sm">
+            <div className="lg:col-span-2 bg-zinc-900 rounded flex flex-col border border-zinc-800 p-4 shadow-sm">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-4">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500">Trend Pendapatan Bersih</h3>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-400">Trend Pendapatan Bersih</h3>
               </div>
               <div className="h-[300px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
@@ -364,7 +363,7 @@ export default function App() {
                         <stop offset="95%" stopColor={chartColor} stopOpacity={0}/>
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#27272a" />
                     <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#94a3b8', fontWeight: 600, fontFamily: 'monospace' }} dy={10} />
                     <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#94a3b8', fontWeight: 600, fontFamily: 'monospace' }} tickFormatter={(value) => `RM${value}`} />
                     <Tooltip 
@@ -380,15 +379,15 @@ export default function App() {
             </div>
 
             {/* Weekly Sales Bar Chart */}
-            <div className="bg-white border border-slate-200 rounded p-4 flex flex-col shadow-sm">
+            <div className="bg-zinc-900 border border-zinc-800 rounded p-4 flex flex-col shadow-sm">
               <div className="mb-4 flex flex-col items-start gap-1">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500">Perbelanjaan Mengikut Kategori</h3>
-                <span className="text-[10px] text-slate-400 font-bold uppercase">7 Kategori Terbesar</span>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-400">Perbelanjaan Mengikut Kategori</h3>
+                <span className="text-[10px] text-zinc-500 font-bold uppercase">7 Kategori Terbesar</span>
               </div>
               <div className="h-[300px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={dynamicSalesData} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#27272a" />
                     <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#94a3b8', fontWeight: 600, fontFamily: 'monospace' }} dy={10} />
                     <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#94a3b8', fontWeight: 600, fontFamily: 'monospace' }} tickFormatter={(value) => `RM${value}`} />
                     <Tooltip 
@@ -407,14 +406,14 @@ export default function App() {
           )}
 
           {(activeTab === 'dashboard' || activeTab === 'transactions') && (
-          <div className="bg-white border border-slate-200 rounded overflow-hidden shadow-sm">
-            <div className="px-4 py-3 border-b border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="bg-zinc-900 border border-zinc-800 rounded overflow-hidden shadow-sm">
+            <div className="px-4 py-3 border-b border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-4">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500">Buku Tunai / Transaksi Terkini</h3>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-400">Buku Tunai / Transaksi Terkini</h3>
                 {activeTab === 'transactions' && (
                   <button 
                     onClick={() => setAddTransactionModalOpen(true)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 text-[10px] font-bold uppercase tracking-wider transition-colors rounded shadow-sm inline-flex items-center gap-1"
+                    className="bg-amber-500 text-black hover:bg-amber-400 text-black px-3 py-1 text-[10px] font-bold uppercase tracking-wider transition-colors rounded shadow-sm inline-flex items-center gap-1"
                   >
                     <Plus className="h-3 w-3" /> Catat Transaksi
                   </button>
@@ -423,20 +422,20 @@ export default function App() {
               
               <div className="flex flex-wrap items-center gap-2">
                 <div className="relative">
-                  <Search className="h-3.5 w-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <Search className="h-3.5 w-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-500" />
                   <input 
                     type="text" 
                     placeholder="Cari transaksi..." 
                     value={searchQuery}
                     onChange={e => setSearchQuery(e.target.value)}
-                    className="pl-8 pr-3 py-1 bg-slate-50 border border-slate-200 rounded text-[10px] uppercase font-bold focus:bg-white focus:border-blue-500 outline-none w-32 sm:w-40 transition-colors placeholder:text-slate-400"
+                    className="pl-8 pr-3 py-1 bg-zinc-950 border border-zinc-800 rounded text-[10px] uppercase font-bold focus:bg-zinc-900 focus:border-amber-500 outline-none w-32 sm:w-40 transition-colors placeholder:text-zinc-500"
                   />
                 </div>
                 
                 <select 
                   value={statusFilter}
                   onChange={e => setStatusFilter(e.target.value)}
-                  className="bg-slate-50 border border-slate-200 rounded text-[10px] px-2 py-1 focus:border-blue-500 outline-none uppercase font-bold tracking-wider text-slate-600"
+                  className="bg-zinc-950 border border-zinc-800 rounded text-[10px] px-2 py-1 focus:border-amber-500 outline-none uppercase font-bold tracking-wider text-zinc-300"
                 >
                   <option value="All">Semua Jenis</option>
                   <option value="income">Pemasukan (Income)</option>
@@ -444,8 +443,8 @@ export default function App() {
                   <option value="hutang_customer">Hutang / Piutang</option>
                 </select>
 
-                <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded px-2">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest hidden sm:inline">Bulan:</span>
+                <div className="flex items-center gap-1 bg-zinc-950 border border-zinc-800 rounded px-2">
+                  <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest hidden sm:inline">Bulan:</span>
                   <input 
                     type="month"
                     onChange={e => {
@@ -458,22 +457,22 @@ export default function App() {
                         setDateRange({ start: '', end: '' });
                       }
                     }}
-                    className="bg-transparent text-[10px] py-1 focus:outline-none text-slate-600 uppercase font-bold"
+                    className="bg-transparent text-[10px] py-1 focus:outline-none text-zinc-300 uppercase font-bold"
                   />
-                  <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-slate-200">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase">From</span>
+                  <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-zinc-800">
+                    <span className="text-[10px] font-bold text-zinc-500 uppercase">From</span>
                     <input 
                       type="date"
                       value={dateRange.start}
                       onChange={e => setDateRange(prev => ({ ...prev, start: e.target.value }))}
-                      className="bg-transparent text-[10px] py-1 focus:outline-none text-slate-600 uppercase font-bold"
+                      className="bg-transparent text-[10px] py-1 focus:outline-none text-zinc-300 uppercase font-bold"
                     />
-                    <span className="text-[10px] font-bold text-slate-400 uppercase">To</span>
+                    <span className="text-[10px] font-bold text-zinc-500 uppercase">To</span>
                     <input 
                       type="date"
                       value={dateRange.end}
                       onChange={e => setDateRange(prev => ({ ...prev, end: e.target.value }))}
-                      className="bg-transparent text-[10px] py-1 focus:outline-none text-slate-600 uppercase font-bold"
+                      className="bg-transparent text-[10px] py-1 focus:outline-none text-zinc-300 uppercase font-bold"
                     />
                   </div>
                 </div>
@@ -492,7 +491,7 @@ export default function App() {
                     link.click();
                     link.remove();
                   }}
-                  className="bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200 px-3 py-1 rounded text-[10px] uppercase font-bold flex items-center gap-1 transition-colors"
+                  className="bg-zinc-800 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 px-3 py-1 rounded text-[10px] uppercase font-bold flex items-center gap-1 transition-colors"
                 >
                   <Download className="h-3 w-3" /> Export CSV
                 </button>
@@ -500,36 +499,36 @@ export default function App() {
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left whitespace-nowrap">
-                <thead className="bg-slate-50 border-b border-slate-200">
+                <thead className="bg-zinc-950 border-b border-zinc-800">
                   <tr>
-                    <th scope="col" className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Date</th>
-                    <th scope="col" className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Description</th>
-                    <th scope="col" className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Kategori</th>
-                    <th scope="col" className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Jenis</th>
-                    <th scope="col" className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider text-right">Amount (RM)</th>
-                    <th scope="col" className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider text-right">Tindakan</th>
+                    <th scope="col" className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Date</th>
+                    <th scope="col" className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Description</th>
+                    <th scope="col" className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Kategori</th>
+                    <th scope="col" className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Jenis</th>
+                    <th scope="col" className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider text-right">Amount (RM)</th>
+                    <th scope="col" className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider text-right">Tindakan</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-zinc-800">
                   {filteredTransactions.length > 0 ? filteredTransactions.map((trx: any, idx: number) => (
                     <tr 
                       key={trx.id} 
-                      className={`text-xs ${idx % 2 === 1 ? 'bg-slate-50/50' : 'bg-white'} hover:bg-slate-50 transition-colors`}
+                      className={`text-xs ${idx % 2 === 1 ? 'bg-zinc-950/50' : 'bg-zinc-900'} hover:bg-zinc-950 transition-colors`}
                     >
-                      <td className="px-4 py-2.5 font-mono text-slate-900 font-medium">
+                      <td className="px-4 py-2.5 font-mono text-white font-medium">
                         {trx.date}
                       </td>
-                      <td className="px-4 py-2.5 font-medium text-slate-900 whitespace-nowrap overflow-hidden text-ellipsis max-w-xs">
+                      <td className="px-4 py-2.5 font-medium text-white whitespace-nowrap overflow-hidden text-ellipsis max-w-xs">
                         {trx.description}
                       </td>
-                      <td className="px-4 py-2.5 text-slate-500 font-medium">
+                      <td className="px-4 py-2.5 text-zinc-400 font-medium">
                         {trx.category}
                       </td>
                       <td className="px-4 py-2.5">
                         <span className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wide border ${
-                          trx.type === 'income' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 
-                          trx.type === 'expense' ? 'bg-rose-50 text-rose-700 border-rose-200' :
-                          'bg-amber-50 text-amber-700 border-amber-200'
+                          trx.type === 'income' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 
+                          trx.type === 'expense' ? 'bg-rose-500/10 text-rose-400 border-rose-500/20' :
+                          'bg-amber-500/10 text-amber-400 border-amber-500/20'
                         }`}>
                           {trx.type === 'income' ? 'Income' : trx.type === 'expense' ? 'Expense' : 'Hutang'}
                         </span>
@@ -548,7 +547,7 @@ export default function App() {
                               setTransactions(transactions.filter((t: any) => t.id !== trx.id));
                             }
                           }}
-                          className="p-1 hover:bg-rose-50 hover:text-rose-600 text-slate-400 rounded transition-colors inline-block"
+                          className="p-1 hover:bg-rose-500/10 hover:text-rose-400 text-zinc-500 rounded transition-colors inline-block"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
@@ -556,7 +555,7 @@ export default function App() {
                     </tr>
                   )) : (
                     <tr>
-                      <td colSpan={6} className="px-4 py-8 text-center text-slate-500 text-xs shadow-inner bg-slate-50/50">
+                      <td colSpan={6} className="px-4 py-8 text-center text-zinc-400 text-xs shadow-inner bg-zinc-950/50">
                         No transactions match your filters.
                       </td>
                     </tr>
@@ -569,40 +568,40 @@ export default function App() {
 
           {activeTab === 'inventory' && (
              <div className="space-y-4">
-               <div className="flex justify-between items-center bg-white p-4 rounded border border-slate-200 shadow-sm">
+               <div className="flex justify-between items-center bg-zinc-900 p-4 rounded border border-zinc-800 shadow-sm">
                  <div>
-                   <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wide">Inventory Items</h2>
-                   <p className="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Manage stock and restocks</p>
+                   <h2 className="text-sm font-bold text-white uppercase tracking-wide">Inventory Items</h2>
+                   <p className="text-[10px] text-zinc-400 uppercase tracking-widest mt-1">Manage stock and restocks</p>
                  </div>
                  <button 
                    onClick={() => setRestockModalOpen(true)}
-                   className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded text-[10px] font-bold uppercase tracking-wider transition-colors shadow-sm"
+                   className="bg-amber-500 text-black hover:bg-amber-400 text-black px-3 py-1.5 rounded text-[10px] font-bold uppercase tracking-wider transition-colors shadow-sm"
                  >
                    + Catat Pengeluaran Restock
                  </button>
                </div>
 
-               <div className="bg-white border border-slate-200 rounded overflow-hidden shadow-sm">
+               <div className="bg-zinc-900 border border-zinc-800 rounded overflow-hidden shadow-sm">
                   <div className="overflow-x-auto">
                     <table className="w-full text-left whitespace-nowrap">
-                       <thead className="bg-slate-50 border-b border-slate-200">
+                       <thead className="bg-zinc-950 border-b border-zinc-800">
                          <tr>
-                            <th className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Item Name</th>
-                            <th className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider text-right">Stock</th>
-                            <th className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Status</th>
-                            <th className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider text-right">Tindakan</th>
+                            <th className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Item Name</th>
+                            <th className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider text-right">Stock</th>
+                            <th className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Status</th>
+                            <th className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider text-right">Tindakan</th>
                          </tr>
                        </thead>
-                       <tbody className="divide-y divide-slate-100">
+                       <tbody className="divide-y divide-zinc-800">
                          {inventory.map((item: any, idx: number) => (
-                         <tr key={item.id} className={`text-xs ${idx % 2 === 1 ? 'bg-slate-50/50' : 'bg-white'}`}>
-                            <td className="px-4 py-2.5 font-medium text-slate-900">{item.name}</td>
-                            <td className="px-4 py-2.5 font-mono text-right text-slate-900">{item.stock}</td>
+                         <tr key={item.id} className={`text-xs ${idx % 2 === 1 ? 'bg-zinc-950/50' : 'bg-zinc-900'}`}>
+                            <td className="px-4 py-2.5 font-medium text-white">{item.name}</td>
+                            <td className="px-4 py-2.5 font-mono text-right text-white">{item.stock}</td>
                             <td className="px-4 py-2.5">
                                <span className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wide ${
-                                 item.stock > 10 ? 'bg-emerald-100 text-emerald-700' :
-                                 item.stock > 0 ? 'bg-amber-100 text-amber-700' :
-                                 'bg-rose-100 text-rose-700'
+                                 item.stock > 10 ? 'bg-emerald-500/10 text-emerald-400' :
+                                 item.stock > 0 ? 'bg-amber-500/10 text-amber-400' :
+                                 'bg-rose-500/10 text-rose-400'
                                }`}>{item.stock > 10 ? 'In Stock' : item.stock > 0 ? 'Low Stock' : 'Out of Stock'}</span>
                             </td>
                             <td className="px-4 py-2.5 text-right">
@@ -612,7 +611,7 @@ export default function App() {
                                     setInventory(inventory.filter((i: any) => i.id !== item.id));
                                   }
                                 }}
-                                className="p-1 hover:bg-rose-50 hover:text-rose-600 text-slate-400 rounded transition-colors inline-block"
+                                className="p-1 hover:bg-rose-500/10 hover:text-rose-400 text-zinc-500 rounded transition-colors inline-block"
                               >
                                 <Trash2 className="h-4 w-4" />
                               </button>
@@ -628,12 +627,12 @@ export default function App() {
 
           {/* Restock Modal */}
           {isRestockModalOpen && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm transition-opacity" onClick={() => setRestockModalOpen(false)}>
-              <div className="bg-white rounded border border-slate-200 shadow-xl w-full max-w-md overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
-                <div className="flex items-center justify-between p-4 border-b border-slate-200 bg-slate-50">
-                  <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Catat Pengeluaran Restock</h3>
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm transition-opacity" onClick={() => setRestockModalOpen(false)}>
+              <div className="bg-zinc-900 rounded border border-zinc-800 shadow-xl w-full max-w-md overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
+                <div className="flex items-center justify-between p-4 border-b border-zinc-800 bg-zinc-950">
+                  <h3 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Catat Pengeluaran Restock</h3>
                   <button 
-                    className="text-slate-400 hover:text-slate-600 p-1 rounded hover:bg-slate-200/50 transition-colors" 
+                    className="text-zinc-500 hover:text-zinc-300 p-1 rounded hover:bg-zinc-800/50 transition-colors" 
                     onClick={() => setRestockModalOpen(false)}
                   >
                     <X className="h-4 w-4" />
@@ -677,39 +676,39 @@ export default function App() {
                 }}>
                   <div className="p-5 space-y-4">
                     <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Nama Barang</label>
-                      <input name="item" required type="text" className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500" placeholder="Contoh: Mechanical Keyboard" />
+                      <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Nama Barang</label>
+                      <input name="item" required type="text" className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500" placeholder="Contoh: Mechanical Keyboard" />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Jumlah (Qty)</label>
-                        <input name="qty" required min="1" type="number" className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-900 font-mono focus:outline-none focus:border-blue-500" placeholder="0" />
+                        <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Jumlah (Qty)</label>
+                        <input name="qty" required min="1" type="number" className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-amber-500" placeholder="0" />
                       </div>
                       <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Total Biaya (Modal)</label>
+                        <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Total Biaya (Modal)</label>
                         <div className="relative">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono">$</span>
-                          <input name="cost" required min="0" step="0.01" type="number" className="w-full bg-slate-50 border border-slate-200 rounded pl-7 pr-3 py-2 text-xs text-slate-900 font-mono focus:outline-none focus:border-blue-500" placeholder="0.00" />
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-xs font-mono">$</span>
+                          <input name="cost" required min="0" step="0.01" type="number" className="w-full bg-zinc-950 border border-zinc-800 rounded pl-7 pr-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-amber-500" placeholder="0.00" />
                         </div>
                       </div>
                     </div>
                     <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Pemasok / Vendor</label>
-                      <input name="vendor" required type="text" className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500" placeholder="Contoh: Tech Supply Co." />
+                      <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Pemasok / Vendor</label>
+                      <input name="vendor" required type="text" className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500" placeholder="Contoh: Tech Supply Co." />
                     </div>
                   </div>
 
-                  <div className="bg-slate-50 p-4 border-t border-slate-200 flex justify-end gap-3">
+                  <div className="bg-zinc-950 p-4 border-t border-zinc-800 flex justify-end gap-3">
                     <button 
                       type="button"
-                      className="bg-white border border-slate-300 text-slate-700 px-4 py-1.5 rounded text-[10px] font-bold uppercase tracking-wider hover:bg-slate-50 transition-colors"
+                      className="bg-zinc-900 border border-zinc-700 text-zinc-300 px-4 py-1.5 rounded text-[10px] font-bold uppercase tracking-wider hover:bg-zinc-950 transition-colors"
                       onClick={() => setRestockModalOpen(false)}
                     >
                       Batal
                     </button>
                     <button 
                       type="submit"
-                      className="bg-blue-600 text-white px-4 py-1.5 rounded text-[10px] font-bold shadow-sm uppercase tracking-wider hover:bg-blue-700 transition-colors"
+                      className="bg-amber-500 text-black px-4 py-1.5 rounded text-[10px] font-bold shadow-sm uppercase tracking-wider hover:bg-amber-400 transition-colors"
                     >
                       Simpan Pengeluaran
                     </button>
@@ -721,38 +720,38 @@ export default function App() {
 
           {activeTab === 'customers' && (
              <div className="space-y-4">
-               <div className="flex justify-between items-center bg-white p-4 rounded border border-slate-200 shadow-sm">
+               <div className="flex justify-between items-center bg-zinc-900 p-4 rounded border border-zinc-800 shadow-sm">
                  <div>
-                   <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wide">Customer Directory</h2>
-                   <p className="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Manage your customers</p>
+                   <h2 className="text-sm font-bold text-white uppercase tracking-wide">Customer Directory</h2>
+                   <p className="text-[10px] text-zinc-400 uppercase tracking-widest mt-1">Manage your customers</p>
                  </div>
                  <button 
                    onClick={() => setAddCustomerModalOpen(true)}
-                   className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded text-[10px] font-bold uppercase tracking-wider transition-colors shadow-sm inline-flex items-center gap-1"
+                   className="bg-amber-500 text-black hover:bg-amber-400 text-black px-3 py-1.5 rounded text-[10px] font-bold uppercase tracking-wider transition-colors shadow-sm inline-flex items-center gap-1"
                  >
                    <Plus className="h-3.5 w-3.5" /> Thmabh Customer
                  </button>
                </div>
 
-               <div className="bg-white border border-slate-200 rounded overflow-hidden shadow-sm">
+               <div className="bg-zinc-900 border border-zinc-800 rounded overflow-hidden shadow-sm">
                   <div className="overflow-x-auto">
                     <table className="w-full text-left whitespace-nowrap">
-                       <thead className="bg-slate-50 border-b border-slate-200">
+                       <thead className="bg-zinc-950 border-b border-zinc-800">
                          <tr>
-                            <th className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Customer Name</th>
-                            <th className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">No. Telefon</th>
-                            <th className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider text-right">Orders</th>
-                            <th className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider text-right">Total Spent</th>
-                            <th className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider text-right">Tindakan</th>
+                            <th className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Customer Name</th>
+                            <th className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">No. Telefon</th>
+                            <th className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider text-right">Orders</th>
+                            <th className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider text-right">Total Spent</th>
+                            <th className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider text-right">Tindakan</th>
                          </tr>
                        </thead>
-                       <tbody className="divide-y divide-slate-100">
+                       <tbody className="divide-y divide-zinc-800">
                          {customers.map((customer: any, idx: number) => (
-                         <tr key={customer.id} className={`text-xs ${idx % 2 === 1 ? 'bg-slate-50/50' : 'bg-white'}`}>
-                            <td className="px-4 py-2.5 font-medium text-slate-900">{customer.name}</td>
-                            <td className="px-4 py-2.5 text-slate-500">{customer.phone || customer.email || '-'}</td>
-                            <td className="px-4 py-2.5 font-mono text-right text-slate-900">{customer.orders}</td>
-                            <td className="px-4 py-2.5 font-mono font-bold text-right text-slate-900">${customer.totalSpent.toFixed(2)}</td>
+                         <tr key={customer.id} className={`text-xs ${idx % 2 === 1 ? 'bg-zinc-950/50' : 'bg-zinc-900'}`}>
+                            <td className="px-4 py-2.5 font-medium text-white">{customer.name}</td>
+                            <td className="px-4 py-2.5 text-zinc-400">{customer.phone || customer.email || '-'}</td>
+                            <td className="px-4 py-2.5 font-mono text-right text-white">{customer.orders}</td>
+                            <td className="px-4 py-2.5 font-mono font-bold text-right text-white">${customer.totalSpent.toFixed(2)}</td>
                             <td className="px-4 py-2.5 text-right">
                               <button 
                                 onClick={() => {
@@ -760,7 +759,7 @@ export default function App() {
                                     setCustomers(customers.filter((c: any) => c.id !== customer.id));
                                   }
                                 }}
-                                className="p-1 hover:bg-rose-50 hover:text-rose-600 text-slate-400 rounded transition-colors inline-block"
+                                className="p-1 hover:bg-rose-500/10 hover:text-rose-400 text-zinc-500 rounded transition-colors inline-block"
                               >
                                 <Trash2 className="h-4 w-4" />
                               </button>
@@ -776,35 +775,35 @@ export default function App() {
 
           {activeTab === 'hutang' && (
              <div className="space-y-4">
-               <div className="flex justify-between items-center bg-white p-4 rounded border border-slate-200 shadow-sm">
+               <div className="flex justify-between items-center bg-zinc-900 p-4 rounded border border-zinc-800 shadow-sm">
                  <div>
-                   <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wide">Senarai Penghutang</h2>
-                   <p className="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Senarai orang berhutang dengan perniagaan</p>
+                   <h2 className="text-sm font-bold text-white uppercase tracking-wide">Senarai Penghutang</h2>
+                   <p className="text-[10px] text-zinc-400 uppercase tracking-widest mt-1">Senarai orang berhutang dengan perniagaan</p>
                  </div>
                </div>
 
-               <div className="bg-white border border-slate-200 rounded overflow-hidden shadow-sm">
+               <div className="bg-zinc-900 border border-zinc-800 rounded overflow-hidden shadow-sm">
                   <div className="overflow-x-auto">
                     <table className="w-full text-left whitespace-nowrap">
-                       <thead className="bg-slate-50 border-b border-slate-200">
+                       <thead className="bg-zinc-950 border-b border-zinc-800">
                          <tr>
-                            <th className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Nama Orang/Syarikat</th>
-                            <th className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Keterangan</th>
-                            <th className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Tarikh</th>
-                            <th className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider text-right">Amaun Hutang</th>
+                            <th className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Nama Orang/Syarikat</th>
+                            <th className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Keterangan</th>
+                            <th className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Tarikh</th>
+                            <th className="px-4 py-2 text-[10px] font-bold text-zinc-500 uppercase tracking-wider text-right">Amaun Hutang</th>
                          </tr>
                        </thead>
-                       <tbody className="divide-y divide-slate-100">
+                       <tbody className="divide-y divide-zinc-800">
                          {transactions.filter((t: any) => t.type === 'hutang_customer').map((trx: any, idx: number) => (
-                         <tr key={trx.id} className={`text-xs ${idx % 2 === 1 ? 'bg-slate-50/50' : 'bg-white'} hover:bg-slate-50 transition-colors`}>
-                            <td className="px-4 py-2.5 font-medium text-slate-900">{trx.person || '-'}</td>
-                            <td className="px-4 py-2.5 text-slate-900">{trx.description}</td>
-                            <td className="px-4 py-2.5 font-mono text-slate-500">{trx.date}</td>
+                         <tr key={trx.id} className={`text-xs ${idx % 2 === 1 ? 'bg-zinc-950/50' : 'bg-zinc-900'} hover:bg-zinc-950 transition-colors`}>
+                            <td className="px-4 py-2.5 font-medium text-white">{trx.person || '-'}</td>
+                            <td className="px-4 py-2.5 text-white">{trx.description}</td>
+                            <td className="px-4 py-2.5 font-mono text-zinc-400">{trx.date}</td>
                             <td className="px-4 py-2.5 font-mono font-bold text-right text-amber-600">RM {trx.amount.toLocaleString('en-MY', {minimumFractionDigits: 2})}</td>
                          </tr>
                          ))}
                          {transactions.filter((t: any) => t.type === 'hutang_customer').length === 0 && (
-                            <tr><td colSpan={4} className="px-4 py-8 text-center text-slate-400 text-xs">Tiada rekod hutang terkini.</td></tr>
+                            <tr><td colSpan={4} className="px-4 py-8 text-center text-zinc-500 text-xs">Tiada rekod hutang terkini.</td></tr>
                          )}
                        </tbody>
                     </table>
@@ -817,12 +816,12 @@ export default function App() {
 
       {/* Order Details Modal */}
       {selectedOrder && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm transition-opacity" onClick={() => setSelectedOrder(null)}>
-          <div className="bg-white rounded border border-slate-200 shadow-xl w-full max-w-lg overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
-            <div className="flex items-center justify-between p-4 border-b border-slate-200 bg-slate-50">
-              <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Order Details</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm transition-opacity" onClick={() => setSelectedOrder(null)}>
+          <div className="bg-zinc-900 rounded border border-zinc-800 shadow-xl w-full max-w-lg overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-4 border-b border-zinc-800 bg-zinc-950">
+              <h3 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Order Details</h3>
               <button 
-                className="text-slate-400 hover:text-slate-600 p-1 rounded hover:bg-slate-200/50 transition-colors" 
+                className="text-zinc-500 hover:text-zinc-300 p-1 rounded hover:bg-zinc-800/50 transition-colors" 
                 onClick={() => setSelectedOrder(null)}
               >
                 <X className="h-4 w-4" />
@@ -833,13 +832,13 @@ export default function App() {
               {/* Header Info */}
               <div className="flex justify-between items-start">
                 <div>
-                  <p className="text-lg font-mono font-bold text-slate-900 uppercase">{selectedOrder.id}</p>
-                  <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">{selectedOrder.date}</p>
+                  <p className="text-lg font-mono font-bold text-white uppercase">{selectedOrder.id}</p>
+                  <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mt-1">{selectedOrder.date}</p>
                 </div>
                 <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide ${
-                  selectedOrder.status === 'Completed' ? 'bg-emerald-100 text-emerald-700' : 
-                  selectedOrder.status === 'Processing' ? 'bg-blue-100 text-blue-700' :
-                  'bg-amber-100 text-amber-700'
+                  selectedOrder.status === 'Completed' ? 'bg-emerald-500/10 text-emerald-400' : 
+                  selectedOrder.status === 'Processing' ? 'bg-sky-500/10 text-sky-400' :
+                  'bg-amber-500/10 text-amber-400'
                 }`}>
                   {selectedOrder.status}
                 </span>
@@ -847,56 +846,56 @@ export default function App() {
               
               {/* Customer & Shipping Summary */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-slate-50 p-3 rounded border border-slate-100">
-                   <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Customer</p>
-                   <p className="font-medium text-slate-900 text-xs">{selectedOrder.customer}</p>
-                   <p className="text-[10px] text-slate-500 mt-0.5">{selectedOrder.email}</p>
+                <div className="bg-zinc-950 p-3 rounded border border-zinc-800">
+                   <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-1">Customer</p>
+                   <p className="font-medium text-white text-xs">{selectedOrder.customer}</p>
+                   <p className="text-[10px] text-zinc-400 mt-0.5">{selectedOrder.email}</p>
                 </div>
-                <div className="bg-slate-50 p-3 rounded border border-slate-100">
-                   <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Payment & Shipping</p>
-                   <p className="text-xs text-slate-900">{selectedOrder.paymentMethod}</p>
-                   <p className="text-[10px] text-slate-500 mt-0.5 truncate" title={selectedOrder.shippingAddress}>{selectedOrder.shippingAddress}</p>
+                <div className="bg-zinc-950 p-3 rounded border border-zinc-800">
+                   <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-1">Payment & Shipping</p>
+                   <p className="text-xs text-white">{selectedOrder.paymentMethod}</p>
+                   <p className="text-[10px] text-zinc-400 mt-0.5 truncate" title={selectedOrder.shippingAddress}>{selectedOrder.shippingAddress}</p>
                 </div>
               </div>
 
               {/* Items List */}
               <div>
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Order Items</p>
-                <div className="border border-slate-200 rounded divide-y divide-slate-100">
+                <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Order Items</p>
+                <div className="border border-zinc-800 rounded divide-y divide-zinc-800">
                   {selectedOrder.items?.map((item: any, i: number) => (
                     <div key={i} className="flex justify-between items-center p-3 text-xs">
                       <div className="flex items-center gap-3">
-                        <div className="h-8 w-8 bg-slate-100 rounded flex items-center justify-center text-slate-400">
+                        <div className="h-8 w-8 bg-zinc-800 rounded flex items-center justify-center text-zinc-500">
                            <Package className="h-4 w-4" />
                         </div>
                         <div>
-                          <p className="font-medium text-slate-900">{item.name}</p>
-                          <p className="text-[10px] text-slate-500 uppercase tracking-wider">Qty: {item.quantity}</p>
+                          <p className="font-medium text-white">{item.name}</p>
+                          <p className="text-[10px] text-zinc-400 uppercase tracking-wider">Qty: {item.quantity}</p>
                         </div>
                       </div>
-                      <p className="font-mono font-bold text-slate-900">${item.price.toFixed(2)}</p>
+                      <p className="font-mono font-bold text-white">${item.price.toFixed(2)}</p>
                     </div>
                   ))}
                 </div>
               </div>
               
               {/* Total amounts */}
-              <div className="flex justify-between items-center pt-4 border-t border-slate-100">
-                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Amount</p>
-                 <p className="text-lg font-mono font-bold text-slate-900">${selectedOrder.amount.toFixed(2)}</p>
+              <div className="flex justify-between items-center pt-4 border-t border-zinc-800">
+                 <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Total Amount</p>
+                 <p className="text-lg font-mono font-bold text-white">${selectedOrder.amount.toFixed(2)}</p>
               </div>
             </div>
 
             {/* Footer Actions */}
-            <div className="bg-slate-50 p-4 border-t border-slate-200 flex justify-end gap-3">
+            <div className="bg-zinc-950 p-4 border-t border-zinc-800 flex justify-end gap-3">
               <button 
-                className="bg-white border border-slate-300 text-slate-700 px-4 py-1.5 rounded text-[10px] font-bold uppercase tracking-wider hover:bg-slate-50 transition-colors"
+                className="bg-zinc-900 border border-zinc-700 text-zinc-300 px-4 py-1.5 rounded text-[10px] font-bold uppercase tracking-wider hover:bg-zinc-950 transition-colors"
                 onClick={() => setSelectedOrder(null)}
               >
                 Close
               </button>
               <button 
-                className="bg-blue-600 text-white px-4 py-1.5 rounded text-[10px] font-bold shadow-sm uppercase tracking-wider hover:bg-blue-700 transition-colors"
+                className="bg-amber-500 text-black px-4 py-1.5 rounded text-[10px] font-bold shadow-sm uppercase tracking-wider hover:bg-amber-400 transition-colors"
                 onClick={() => setSelectedOrder(null)}
               >
                 View Invoice
@@ -908,11 +907,11 @@ export default function App() {
 
       {/* Add Customer Modal */}
       {isAddCustomerModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm transition-opacity" onClick={() => setAddCustomerModalOpen(false)}>
-          <div className="bg-white rounded border border-slate-200 shadow-xl w-full max-w-md overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
-            <div className="flex items-center justify-between p-4 border-b border-slate-200 bg-slate-50">
-              <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Add New Customer</h3>
-              <button className="text-slate-400 hover:text-slate-600 p-1" onClick={() => setAddCustomerModalOpen(false)}><X className="h-4 w-4" /></button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm transition-opacity" onClick={() => setAddCustomerModalOpen(false)}>
+          <div className="bg-zinc-900 rounded border border-zinc-800 shadow-xl w-full max-w-md overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-4 border-b border-zinc-800 bg-zinc-950">
+              <h3 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Add New Customer</h3>
+              <button className="text-zinc-500 hover:text-zinc-300 p-1" onClick={() => setAddCustomerModalOpen(false)}><X className="h-4 w-4" /></button>
             </div>
             <form onSubmit={e => {
               e.preventDefault();
@@ -923,10 +922,10 @@ export default function App() {
               setAddCustomerModalOpen(false);
             }}>
               <div className="p-5 space-y-4">
-                <div><label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Name</label><input name="name" required className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500" /></div>
-                <div><label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">No. Telefon</label><input name="phone" type="tel" required className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500" /></div>
+                <div><label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Name</label><input name="name" required className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500" /></div>
+                <div><label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">No. Telefon</label><input name="phone" type="tel" required className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500" /></div>
               </div>
-              <div className="bg-slate-50 p-4 border-t flex justify-end gap-3"><button type="submit" className="bg-blue-600 text-white px-4 py-1.5 rounded text-xs font-bold uppercase tracking-wider shadow-sm">Save</button></div>
+              <div className="bg-zinc-950 p-4 border-t flex justify-end gap-3"><button type="submit" className="bg-amber-500 text-black px-4 py-1.5 rounded text-xs font-bold uppercase tracking-wider shadow-sm">Save</button></div>
             </form>
           </div>
         </div>
@@ -934,11 +933,11 @@ export default function App() {
 
       {/* Add Debt Modal */}
       {isAddDebtModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm transition-opacity" onClick={() => setAddDebtModalOpen(false)}>
-          <div className="bg-white rounded border border-slate-200 shadow-xl w-full max-w-md overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
-            <div className="flex items-center justify-between p-4 border-b border-slate-200 bg-slate-50">
-              <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Add New Debt</h3>
-              <button className="text-slate-400 hover:text-slate-600 p-1" onClick={() => setAddDebtModalOpen(false)}><X className="h-4 w-4" /></button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm transition-opacity" onClick={() => setAddDebtModalOpen(false)}>
+          <div className="bg-zinc-900 rounded border border-zinc-800 shadow-xl w-full max-w-md overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-4 border-b border-zinc-800 bg-zinc-950">
+              <h3 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Add New Debt</h3>
+              <button className="text-zinc-500 hover:text-zinc-300 p-1" onClick={() => setAddDebtModalOpen(false)}><X className="h-4 w-4" /></button>
             </div>
             <form onSubmit={e => {
               e.preventDefault();
@@ -950,11 +949,11 @@ export default function App() {
               setAddDebtModalOpen(false);
             }}>
               <div className="p-5 space-y-4">
-                <div><label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Vendor</label><input name="vendor" required className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500" /></div>
-                <div><label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Amount</label><input name="amount" type="number" step="0.01" required className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500" /></div>
-                <div><label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Due Date</label><input name="dueDate" type="date" required className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500" /></div>
+                <div><label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Vendor</label><input name="vendor" required className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500" /></div>
+                <div><label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Amount</label><input name="amount" type="number" step="0.01" required className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500" /></div>
+                <div><label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Due Date</label><input name="dueDate" type="date" required className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500" /></div>
               </div>
-              <div className="bg-slate-50 p-4 border-t flex justify-end gap-3"><button type="submit" className="bg-blue-600 text-white px-4 py-1.5 rounded text-xs font-bold uppercase tracking-wider shadow-sm">Save</button></div>
+              <div className="bg-zinc-950 p-4 border-t flex justify-end gap-3"><button type="submit" className="bg-amber-500 text-black px-4 py-1.5 rounded text-xs font-bold uppercase tracking-wider shadow-sm">Save</button></div>
             </form>
           </div>
         </div>
@@ -962,11 +961,11 @@ export default function App() {
 
       {/* Add Transaction Modal */}
       {isAddTransactionModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm transition-opacity" onClick={() => setAddTransactionModalOpen(false)}>
-          <div className="bg-white rounded border border-slate-200 shadow-xl w-full max-w-md overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
-            <div className="flex items-center justify-between p-4 border-b border-slate-200 bg-slate-50">
-              <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Catat Transaksi Baru</h3>
-              <button className="text-slate-400 hover:text-slate-600 p-1" onClick={() => setAddTransactionModalOpen(false)}><X className="h-4 w-4" /></button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm transition-opacity" onClick={() => setAddTransactionModalOpen(false)}>
+          <div className="bg-zinc-900 rounded border border-zinc-800 shadow-xl w-full max-w-md overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-4 border-b border-zinc-800 bg-zinc-950">
+              <h3 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Catat Transaksi Baru</h3>
+              <button className="text-zinc-500 hover:text-zinc-300 p-1" onClick={() => setAddTransactionModalOpen(false)}><X className="h-4 w-4" /></button>
             </div>
             <form onSubmit={e => {
               e.preventDefault();
@@ -983,10 +982,10 @@ export default function App() {
             }}>
               <div className="p-5 space-y-4">
                 <div className="grid grid-cols-2 gap-4">
-                  <div><label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Tarikh</label><input name="date" type="date" required defaultValue={new Date().toISOString().split('T')[0]} className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500" /></div>
+                  <div><label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Tarikh</label><input name="date" type="date" required defaultValue={new Date().toISOString().split('T')[0]} className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500" /></div>
                   <div>
-                    <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Jenis</label>
-                    <select name="type" id="trx-type-select" className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500" onChange={(e) => {
+                    <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Jenis</label>
+                    <select name="type" id="trx-type-select" className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500" onChange={(e) => {
                       const personGroup = document.getElementById('person-input-group');
                       if (personGroup) {
                         personGroup.style.display = e.target.value === 'hutang_customer' ? 'block' : 'none';
@@ -998,12 +997,12 @@ export default function App() {
                     </select>
                   </div>
                 </div>
-                <div id="person-input-group" style={{ display: 'none' }}><label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Nama Penghutang</label><input name="person" placeholder="Contoh: Ali, Syarikat ABC" className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500" /></div>
-                <div><label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Keterangan / Description</label><input name="description" required placeholder="Contoh: Customer beli tunai" className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500" /></div>
-                <div><label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Kategori</label><input name="category" required placeholder="Contoh: Bisnes, Hutang, Health" className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500" /></div>
-                <div><label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Jumlah (RM)</label><input name="amount" type="number" step="0.01" min="0" required placeholder="0.00" className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500 font-mono" /></div>
+                <div id="person-input-group" style={{ display: 'none' }}><label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Nama Penghutang</label><input name="person" placeholder="Contoh: Ali, Syarikat ABC" className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500" /></div>
+                <div><label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Keterangan / Description</label><input name="description" required placeholder="Contoh: Customer beli tunai" className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500" /></div>
+                <div><label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Kategori</label><input name="category" required placeholder="Contoh: Bisnes, Hutang, Health" className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500" /></div>
+                <div><label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">Jumlah (RM)</label><input name="amount" type="number" step="0.01" min="0" required placeholder="0.00" className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500 font-mono" /></div>
               </div>
-              <div className="bg-slate-50 p-4 border-t flex justify-end gap-3"><button type="submit" className="bg-blue-600 text-white px-4 py-1.5 rounded text-xs font-bold uppercase tracking-wider shadow-sm hover:bg-blue-700">Simpan Transaksi</button></div>
+              <div className="bg-zinc-950 p-4 border-t flex justify-end gap-3"><button type="submit" className="bg-amber-500 text-black px-4 py-1.5 rounded text-xs font-bold uppercase tracking-wider shadow-sm hover:bg-amber-400">Simpan Transaksi</button></div>
             </form>
           </div>
         </div>
